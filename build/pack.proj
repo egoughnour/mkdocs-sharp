@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <RootDir>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..'))</RootDir>
-    <SolutionFile>$(RootDir)\MkDocsSharp.MDGen.sln</SolutionFile>
+    <SolutionFile>$(RootDir)\MkDocsSharp.MDGen.slnx</SolutionFile>
     <PackProject>$(RootDir)\MkDocsSharp.MDGen.MSBuild\MkDocsSharp.MDGen.MSBuild.csproj</PackProject>
     <ArtifactsDir>$(RootDir)\artifacts</ArtifactsDir>
     <Configuration Condition="'$(Configuration)'==''">Release</Configuration>

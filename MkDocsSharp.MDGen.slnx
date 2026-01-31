@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="MkDocsSharp.MDGen.MSBuild.Test/MkDocsSharp.MDGen.MSBuild.Test.csproj" />
+  <Project Path="MkDocsSharp.MDGen.MSBuild/MkDocsSharp.MDGen.MSBuild.csproj" />
+  <Project Path="MkDocsSharp.MDGen.Test/MkDocsSharp.MDGen.Test.csproj" />
+  <Project Path="MkDocsSharp.MDGen/MkDocsSharp.MDGen.csproj" />
+</Solution>

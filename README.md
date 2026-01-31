@@ -56,5 +56,5 @@ Set `NUGET_API_KEY` (or pass `-NuGetApiKey`) and install `gh` if you want the sc
 
 ### Solutions
 
-- `MkDocsSharp.MDGen.sln` contains the shipping projects.
+- `MkDocsSharp.MDGen.slnx` contains the shipping projects.
 - `UserCode.sln` contains the sample and its tests (kept out of packaging).
