@@ -55,9 +55,18 @@ namespace PxtlCa.XmlCommentMarkDownGenerator
                 }
                 if (name == "see")
                 {
-                    var cref = el.Attribute("cref")?.Value;
-                    var anchor = cref != null && cref.StartsWith("!:#");
-                    name = anchor ? "seeAnchor" : "seePage";
+                    // Check for langword attribute first (e.g., <see langword="null"/>)
+                    var langword = el.Attribute("langword")?.Value;
+                    if (langword != null)
+                    {
+                        name = "seeLangword";
+                    }
+                    else
+                    {
+                        var cref = el.Attribute("cref")?.Value;
+                        var anchor = cref != null && cref.StartsWith("!:#");
+                        name = anchor ? "seeAnchor" : "seePage";
+                    }
                 }
                 //treat first Param element separately to add table headers.
                 if (name.EndsWith("param")

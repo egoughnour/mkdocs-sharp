@@ -242,6 +242,108 @@ This project demonstrates XML documentation patterns.
         }
     }
 
+    [TestMethod]
+    public void GenerateMarkdown_ContainsAllXmlDocTagOutputs()
+    {
+        if (!File.Exists(_xmlDocPath))
+        {
+            Assert.Inconclusive($"XML documentation file not found: {_xmlDocPath}");
+            return;
+        }
+
+        // Arrange
+        var logger = new TestLogger();
+        var outputDir = Path.Combine(_testDir, "output");
+        Directory.CreateDirectory(outputDir);
+
+        var generator = new MarkdownGenerator(logger)
+        {
+            InputXmlFiles = new[] { _xmlDocPath },
+            DocumentationPath = outputDir,
+            MergeFiles = false,
+            WarnOnUnexpectedTag = true
+        };
+
+        // Act
+        var result = generator.Execute();
+        Assert.IsTrue(result, $"Generation failed. Errors: {string.Join(", ", logger.Errors)}");
+        
+        var mdContent = File.ReadAllText(generator.GeneratedMDFiles[0]);
+
+        // Verify outputs from all supported XML doc tags:
+        
+        // summary - should produce type/method descriptions
+        Assert.IsTrue(mdContent.Contains("Demonstrates"), "summary tag should produce descriptions");
+        
+        // remarks - should produce blockquotes (>)
+        Assert.IsTrue(mdContent.Contains(">"), "remarks tag should produce blockquotes");
+        
+        // example - should produce Example header
+        Assert.IsTrue(mdContent.Contains("Example:"), "example tag should produce Example header");
+        
+        // code - should produce code blocks (```)
+        Assert.IsTrue(mdContent.Contains("```"), "code tag should produce code blocks");
+        
+        // param - should produce parameter table
+        Assert.IsTrue(mdContent.Contains("|Name | Description |"), "param tag should produce parameter table");
+        
+        // typeparam - should produce type parameter table
+        Assert.IsTrue(mdContent.Contains("|T:"), "typeparam tag should produce type parameter rows");
+        
+        // returns - should produce Returns section
+        Assert.IsTrue(mdContent.Contains("**Returns**:"), "returns tag should produce Returns section");
+        
+        // exception - should produce exception links
+        Assert.IsTrue(mdContent.Contains("ArgumentNullException") || mdContent.Contains("ArgumentException"), 
+            "exception tag should document exceptions");
+        
+        // value - should produce Value section
+        Assert.IsTrue(mdContent.Contains("**Value**:"), "value tag should produce Value section");
+        
+        // c - should produce inline code (backticks)
+        Assert.IsTrue(mdContent.Contains("`true`") || mdContent.Contains("`false`"), 
+            "c tag should produce inline code");
+        
+        // see cref - should produce links
+        Assert.IsTrue(mdContent.Contains("[`") && mdContent.Contains("`]("), 
+            "see cref tag should produce markdown links");
+        
+        // see langword - should produce keyword formatting
+        Assert.IsTrue(mdContent.Contains("`null`"), "see langword tag should format null keyword");
+        Assert.IsTrue(mdContent.Contains("`async`") || mdContent.Contains("`await`"), 
+            "see langword tag should format async keywords");
+        
+        // seealso - should produce See also section
+        Assert.IsTrue(mdContent.Contains("**See also**:"), "seealso tag should produce See also section");
+        
+        // para - should produce paragraph breaks (multiple newlines in remarks)
+        Assert.IsTrue(mdContent.Contains("\n\n"), "para tag should produce paragraph breaks");
+        
+        // list/item - should produce bullet points
+        Assert.IsTrue(mdContent.Contains("- "), "list/item tags should produce bullet points");
+        
+        // paramref - should produce parameter references
+        Assert.IsTrue(mdContent.Contains("`input`") || mdContent.Contains("`value`"), 
+            "paramref tag should reference parameter names");
+        
+        // typeparamref - should produce type parameter references  
+        Assert.IsTrue(mdContent.Contains("`T`") || mdContent.Contains("`TValue`"), 
+            "typeparamref tag should reference type parameter names");
+        
+        // inheritdoc - should produce inheritance note
+        Assert.IsTrue(mdContent.Contains("Inherits documentation"), 
+            "inheritdoc tag should produce inheritance note");
+        
+        // Verify member type prefixes are expanded
+        Assert.IsTrue(mdContent.Contains("## Type "), "Type members should have Type prefix");
+        Assert.IsTrue(mdContent.Contains("#### Method "), "Method members should have Method prefix");
+        Assert.IsTrue(mdContent.Contains("#### Property "), "Property members should have Property prefix");
+        Assert.IsTrue(mdContent.Contains("#### Field ") || mdContent.Contains("Field"), 
+            "Field members should be documented");
+        Assert.IsTrue(mdContent.Contains("#### Event ") || mdContent.Contains("Event"), 
+            "Event members should be documented");
+    }
+
     /// <summary>
     /// Test logger for system tests.
     /// </summary>

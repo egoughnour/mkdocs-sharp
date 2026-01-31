@@ -116,6 +116,10 @@ namespace PxtlCa.XmlCommentMarkDownGenerator
                 "[`{0}`]({0})",
                 (x, assemblyName) => new[] { x.Attribute("cref")?.Value?.ExtractLastPart() ?? x.Attribute("href")?.Value ?? x.Value ?? "" }
             ),
+            ["seeLangword"] = new TagRenderer(
+                "`{0}`",
+                (x, assemblyName) => new[] { x.Attribute("langword")?.Value ?? "" }
+            ),
             ["seealso"] = new TagRenderer(
                 "**See also**: [`{0}`]({0})\n\n",
                 (x, assemblyName) => new[] { x.Attribute("cref")?.Value?.ExtractLastPart() ?? x.Attribute("href")?.Value ?? x.Value ?? "" }
