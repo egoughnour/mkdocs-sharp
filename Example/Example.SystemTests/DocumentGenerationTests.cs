@@ -1,4 +1,3 @@
-#if NET8_0_OR_GREATER
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PxtlCa.XmlCommentMarkDownGenerator.MSBuild;
 
@@ -358,4 +357,3 @@ This project demonstrates XML documentation patterns.
         public void LogError(Exception exception) => Errors.Add(exception.ToString());
     }
 }
-#endif
