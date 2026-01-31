@@ -6,6 +6,8 @@
     <LangVersion>12.0</LangVersion>
     <RootNamespace>MkDocsSharp.MDGen</RootNamespace>
     <AssemblyName>MkDocsSharp.MDGen</AssemblyName>
+    <PackageId>MkDocsSharp.Core</PackageId>
+    <IsPackable>false</IsPackable>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>

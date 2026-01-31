@@ -13,13 +13,13 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Restore
-        run: dotnet restore MkDocsSharp.MDGen.sln
+        run: dotnet restore MkDocsSharp.MDGen.slnx
       - name: Build
-        run: dotnet build MkDocsSharp.MDGen.sln -c Release --no-restore
+        run: dotnet build MkDocsSharp.MDGen.slnx -c Release --no-restore
       - name: Pack
         run: dotnet msbuild build/pack.proj /t:Pack /p:Configuration=Release
       - name: Test
-        run: dotnet test MkDocsSharp.MDGen.sln -c Release --no-build
+        run: dotnet test MkDocsSharp.MDGen.slnx -c Release --no-build
 
       # Test the example/sample project that consumes the package
       - name: Create local NuGet source
