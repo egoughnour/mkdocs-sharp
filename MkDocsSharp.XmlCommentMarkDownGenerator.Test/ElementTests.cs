@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Text.RegularExpressions;
 
-namespace PxtlCa.XmlCommentMarkDownGenerator.Test
+namespace MkDocsSharp.XmlCommentMarkDownGenerator.Test
 {
     /// <summary>
     /// Summary description for ElementTests
@@ -14,7 +14,7 @@ namespace PxtlCa.XmlCommentMarkDownGenerator.Test
         [TestMethod]
         public void ElementPara()
         {
-            var inputResourceName = "PxtlCa.XmlCommentMarkDownGenerator.Test.ElementPara_input.xml";
+            var inputResourceName = "MkDocsSharp.XmlCommentMarkDownGenerator.Test.ElementPara_input.xml";
             Regex normalizeSpace = new Regex(@"\s+", RegexOptions.Compiled);
             var testInput = TestUtil.FetchResourceAsString(inputResourceName);
 
@@ -26,7 +26,7 @@ namespace PxtlCa.XmlCommentMarkDownGenerator.Test
         [TestMethod]
         public void ElementC()
         {
-            var inputResourceName = "PxtlCa.XmlCommentMarkDownGenerator.Test.ElementC_input.xml";
+            var inputResourceName = "MkDocsSharp.XmlCommentMarkDownGenerator.Test.ElementC_input.xml";
             Regex normalizeSpace = new Regex(@"\s+", RegexOptions.Compiled);
             var testInput = TestUtil.FetchResourceAsString(inputResourceName);
 
@@ -37,7 +37,7 @@ namespace PxtlCa.XmlCommentMarkDownGenerator.Test
         [TestMethod]
         public void ElementParam()
         {
-            var inputResourceName = "PxtlCa.XmlCommentMarkDownGenerator.Test.ElementParam_input.xml";
+            var inputResourceName = "MkDocsSharp.XmlCommentMarkDownGenerator.Test.ElementParam_input.xml";
             Regex normalizeSpace = new Regex(@"\s+", RegexOptions.Compiled);
             var testInput = TestUtil.FetchResourceAsString(inputResourceName);
 

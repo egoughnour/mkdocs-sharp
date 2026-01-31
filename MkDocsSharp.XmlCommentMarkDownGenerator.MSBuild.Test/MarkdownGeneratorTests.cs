@@ -1,8 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PxtlCa.XmlCommentMarkDownGenerator.MSBuild;
+using MkDocsSharp.XmlCommentMarkDownGenerator.MSBuild;
 using System.Xml;
 
-namespace PxtlCa.XmlCommentMarkdownGenerator.MSBuild.Test
+namespace MkDocsSharp.XmlCommentMarkDownGenerator.MSBuild.Test
 {
     /// <summary>
     /// Simple test logger that collects errors and warnings

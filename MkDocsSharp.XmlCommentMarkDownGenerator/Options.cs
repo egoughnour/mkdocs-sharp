@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace PxtlCa.XmlCommentMarkDownGenerator
+namespace MkDocsSharp.XmlCommentMarkDownGenerator
 {
     class Options
     {

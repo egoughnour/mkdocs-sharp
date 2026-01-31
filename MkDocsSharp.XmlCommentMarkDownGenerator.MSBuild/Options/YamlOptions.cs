@@ -1,6 +1,6 @@
 ﻿using YamlDotNet.Serialization;
 
-namespace PxtlCa.XmlCommentMarkDownGenerator.MSBuild.Options
+namespace MkDocsSharp.XmlCommentMarkDownGenerator.MSBuild.Options
 {
     /// <summary>
     /// Specifies the manner in which custom tags will be handled

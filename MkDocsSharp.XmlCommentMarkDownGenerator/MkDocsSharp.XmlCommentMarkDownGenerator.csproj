@@ -4,8 +4,8 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <LangVersion>12.0</LangVersion>
-    <RootNamespace>PxtlCa.XmlCommentMarkDownGenerator</RootNamespace>
-    <AssemblyName>PxtlCa.XmlCommentMarkDownGenerator</AssemblyName>
+    <RootNamespace>MkDocsSharp.XmlCommentMarkDownGenerator</RootNamespace>
+    <AssemblyName>MkDocsSharp.XmlCommentMarkDownGenerator</AssemblyName>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>

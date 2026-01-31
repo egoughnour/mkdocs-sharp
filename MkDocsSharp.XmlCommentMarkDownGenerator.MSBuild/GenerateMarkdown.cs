@@ -2,7 +2,7 @@
 using Microsoft.Build.Utilities;
 using MSBuildTask = Microsoft.Build.Utilities.Task;
 
-namespace PxtlCa.XmlCommentMarkDownGenerator.MSBuild
+namespace MkDocsSharp.XmlCommentMarkDownGenerator.MSBuild
 {
     /// <summary>
     /// MSBuild logger adapter that bridges to TaskLoggingHelper

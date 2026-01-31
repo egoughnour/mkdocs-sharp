@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PxtlCa.XmlCommentMarkDownGenerator.MSBuild;
+using MkDocsSharp.XmlCommentMarkDownGenerator.MSBuild;
 
 namespace Example.SystemTests;
 

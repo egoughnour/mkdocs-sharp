@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\PxtlCa.XmlCommentMarkDownGenerator.MSBuild\PxtlCa.XmlCommentMarkDownGenerator.MSBuild.csproj" />
-    <ProjectReference Include="..\..\PxtlCa.XmlCommentMarkDownGenerator\PxtlCa.XmlCommentMarkDownGenerator.csproj" />
+    <ProjectReference Include="..\..\MkDocsSharp.XmlCommentMarkDownGenerator.MSBuild\MkDocsSharp.XmlCommentMarkDownGenerator.MSBuild.csproj" />
+    <ProjectReference Include="..\..\MkDocsSharp.XmlCommentMarkDownGenerator\MkDocsSharp.XmlCommentMarkDownGenerator.csproj" />
     <ProjectReference Include="..\Example.XmlDocSamples\Example.XmlDocSamples.csproj" />
   </ItemGroup>
 

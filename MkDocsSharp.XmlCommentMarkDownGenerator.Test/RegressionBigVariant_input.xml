@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>PxtlCa.BigVariant.Core</name>
+        <name>MkDocsSharp.BigVariant.Core</name>
     </assembly>
     <members>
-        <member name="T:PxtlCa.BigVariant.Core.BigVariant">
+        <member name="T:MkDocsSharp.BigVariant.Core.BigVariant">
             <summary>
             The SQLCLR BigVariant type
             </summary>
         </member>
-        <member name="P:PxtlCa.BigVariant.Core.BigVariant.Type">
+        <member name="P:MkDocsSharp.BigVariant.Core.BigVariant.Type">
             <summary>
             The SQL CLR Type of the BigVariant, as a String accessible from SQL.
             See https://msdn.microsoft.com/en-us/library/ms131092.aspx for information about the types.
@@ -20,7 +20,7 @@
             SELECT @testVar.Type -- returns 'SqlBoolean'
             </code></example>
         </member>
-        <member name="P:PxtlCa.BigVariant.Core.BigVariant.AsVariant">
+        <member name="P:MkDocsSharp.BigVariant.Core.BigVariant.AsVariant">
             <summary>
             If the BigVariant contains a SQL_VARIANT-compatible type, get its contents.
             Will throw an exception if the type is not SQL_VARIANT-compatible.
@@ -33,7 +33,7 @@
             -- returns 1.79E+308
             </code></example>
         </member>
-        <member name="P:PxtlCa.BigVariant.Core.BigVariant.AsDateTime2">
+        <member name="P:MkDocsSharp.BigVariant.Core.BigVariant.AsDateTime2">
             <summary>
             If the BigVariant contains a DATETIME2 (DateTime in CLR), get its contents.
             Will throw an exception if the type is not DATETIME2.
@@ -46,7 +46,7 @@
             SELECT 'success' WHERE @testInput = @testVar.AsDateTime2
             </code></example>
         </member>
-        <member name="P:PxtlCa.BigVariant.Core.BigVariant.AsXml">
+        <member name="P:MkDocsSharp.BigVariant.Core.BigVariant.AsXml">
             <summary>
             If the BigVariant contains XML, get its contents.
             Will throw an exception if the type is not XML.
@@ -64,7 +64,7 @@
             -- returns 'Gambardella, Matthew' as XML
             ]]></code></example>
         </member>
-        <member name="P:PxtlCa.BigVariant.Core.BigVariant.AsString">
+        <member name="P:MkDocsSharp.BigVariant.Core.BigVariant.AsString">
             <summary>
             If the BigVariant contains NVARCHAR(MAX) or similar long SqlString object, get its contents.
             Will throw an exception if the type is not NVARCHAR(MAX) or similar long SqlString object.
@@ -78,28 +78,28 @@
             </code>
             </example>
         </member>
-        <member name="P:PxtlCa.BigVariant.Core.BigVariant.AsBinary">
+        <member name="P:MkDocsSharp.BigVariant.Core.BigVariant.AsBinary">
             <summary>
             If the BigVariant contains VARBINARY(MAX) or similar long SqlBinary object, get its contents.
             Will throw an exception if the type is not VARBINARY(MAX) or similar long SqlBinary object.
             </summary>
         </member>
-        <member name="M:PxtlCa.BigVariant.Core.BigVariant.Read(System.IO.BinaryReader)">
+        <member name="M:MkDocsSharp.BigVariant.Core.BigVariant.Read(System.IO.BinaryReader)">
             <summary>
             Implement IBinarySerialize.Read because SQL stores everything as binary even temporarily.  Internal plumbing method, don't use.
             </summary>
         </member>
-        <member name="M:PxtlCa.BigVariant.Core.BigVariant.Write(System.IO.BinaryWriter)">
+        <member name="M:MkDocsSharp.BigVariant.Core.BigVariant.Write(System.IO.BinaryWriter)">
             <summary>
             Implement IBinarySerialize.Write because SQL stores everything as binary even temporarily.  Internal plumbing method, don't use.
             </summary>
         </member>
-        <member name="T:PxtlCa.BigVariant.Core.UserDefinedFunctions">
+        <member name="T:MkDocsSharp.BigVariant.Core.UserDefinedFunctions">
             <summary>
             This class collects together various SQL User-Defined-functions used to construct BigVariant values out of various SQL types.
             </summary>
         </member>
-        <member name="M:PxtlCa.BigVariant.Core.UserDefinedFunctions.BigVariantFromXml(System.Data.SqlTypes.SqlXml)">
+        <member name="M:MkDocsSharp.BigVariant.Core.UserDefinedFunctions.BigVariantFromXml(System.Data.SqlTypes.SqlXml)">
             <summary>
             Take the given XML typed SQL object and convert it into a BigVariant.
             </summary>
@@ -115,7 +115,7 @@
             SELECT 'success' WHERE CONVERT(NVARCHAR(4000), @testInput) = CONVERT(NVARCHAR(4000), @testVar.AsXml)
             ]]></code></example>
         </member>
-        <member name="M:PxtlCa.BigVariant.Core.UserDefinedFunctions.BigVariantFromVariant(System.Object)">
+        <member name="M:MkDocsSharp.BigVariant.Core.UserDefinedFunctions.BigVariantFromVariant(System.Object)">
             <summary>
             Take the given SQL_VARIANT object and convert it into a BigVariant.
             </summary>
@@ -129,14 +129,14 @@
             -- returns 1.79E+308
             </code></example>
         </member>
-        <member name="M:PxtlCa.BigVariant.Core.UserDefinedFunctions.BigVariantFromDateTime2(System.Nullable{System.DateTime})">
+        <member name="M:MkDocsSharp.BigVariant.Core.UserDefinedFunctions.BigVariantFromDateTime2(System.Nullable{System.DateTime})">
             <summary>
             Take the given DATETIME2 object and convert it into a BigVariant.
             </summary>
             <param name="value">a DATETIME2 to wrap in a BigVariant</param>
             <returns>A BigVariant containing the given DATETIME2</returns>
         </member>
-        <member name="M:PxtlCa.BigVariant.Core.UserDefinedFunctions.BigVariantFromString(System.Data.SqlTypes.SqlString)">
+        <member name="M:MkDocsSharp.BigVariant.Core.UserDefinedFunctions.BigVariantFromString(System.Data.SqlTypes.SqlString)">
             <summary>
             Take the given NVARCHAR(MAX) or TEXT or NTEXT object and convert it into a BigVariant.
             </summary>
@@ -151,7 +151,7 @@
             SET @testVar = dbo.BigVariantFromString(@testString)
             </code></example>
         </member>
-        <member name="M:PxtlCa.BigVariant.Core.UserDefinedFunctions.BigVariantFromBinary(System.Data.SqlTypes.SqlBinary)">
+        <member name="M:MkDocsSharp.BigVariant.Core.UserDefinedFunctions.BigVariantFromBinary(System.Data.SqlTypes.SqlBinary)">
             <summary>
             Take the given VARBINARY(MAX) or IMAGE or other binary object and convert it into a BigVariant.
             </summary>

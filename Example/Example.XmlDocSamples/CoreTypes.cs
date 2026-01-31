@@ -2,7 +2,7 @@
 // Example.XmlDocSamples - Comprehensive XML Documentation Examples
 // =============================================================================
 // This project demonstrates all C# syntax elements that support XML documentation.
-// It serves as both a reference and a test fixture for the XmlCommentMarkDownGenerator.
+// It serves as both a reference and a test fixture for the MkDocsSharp.XmlCommentMarkDownGenerator.
 // =============================================================================
 
 namespace Example.XmlDocSamples;

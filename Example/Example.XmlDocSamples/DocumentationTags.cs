@@ -2,7 +2,7 @@
 // Comprehensive XML Documentation Tag Examples
 // =============================================================================
 // This file demonstrates ALL supported XML documentation tags to ensure
-// complete coverage for testing the XmlCommentMarkDownGenerator.
+// complete coverage for testing the MkDocsSharp.XmlCommentMarkDownGenerator.
 // =============================================================================
 
 namespace Example.XmlDocSamples;

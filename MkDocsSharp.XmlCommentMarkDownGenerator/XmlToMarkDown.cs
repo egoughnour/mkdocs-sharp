@@ -2,7 +2,7 @@
 using System.Xml;
 using System.Xml.Linq;
 
-namespace PxtlCa.XmlCommentMarkDownGenerator
+namespace MkDocsSharp.XmlCommentMarkDownGenerator
 {
     public static class XmlToMarkdown
     {

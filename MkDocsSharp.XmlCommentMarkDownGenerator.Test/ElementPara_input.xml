@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0"?>
 <doc>
   <assembly>
-    <name>PxtlCa.TestAssembly</name>
+    <name>MkDocsSharp.TestAssembly</name>
   </assembly>
   <members>
-    <member name="T:PxtlCa.TestAssembly.TestType">
+    <member name="T:MkDocsSharp.TestAssembly.TestType">
       <summary>
         <para>first paragraph</para>
         <para>second paragraph</para>

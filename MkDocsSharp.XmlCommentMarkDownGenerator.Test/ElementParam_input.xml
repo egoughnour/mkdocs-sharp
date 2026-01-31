@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0"?>
 <doc>
   <assembly>
-    <name>PxtlCa.TestAssembly</name>
+    <name>MkDocsSharp.TestAssembly</name>
   </assembly>
   <members>
-    <member name="T:PxtlCa.TestAssembly.TestType">
+    <member name="T:MkDocsSharp.TestAssembly.TestType">
       <summary>
         parameter test type summary
       </summary>
     </member>
-    <member name="T:PxtlCa.TestAssembly.TestType.TestMethod(System.Object objA, System.Object objB)">
+    <member name="T:MkDocsSharp.TestAssembly.TestType.TestMethod(System.Object objA, System.Object objB)">
       <summary>
         parameter test method
       </summary>

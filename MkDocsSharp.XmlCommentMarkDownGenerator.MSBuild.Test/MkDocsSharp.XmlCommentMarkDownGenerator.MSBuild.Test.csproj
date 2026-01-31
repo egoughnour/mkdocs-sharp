@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>PxtlCa.XmlCommentMarkdownGenerator.MSBuild.Test</RootNamespace>
-    <AssemblyName>PxtlCa.XmlCommentMarkdownGenerator.MSBuild.Test</AssemblyName>
+    <RootNamespace>MkDocsSharp.XmlCommentMarkDownGenerator.MSBuild.Test</RootNamespace>
+    <AssemblyName>MkDocsSharp.XmlCommentMarkDownGenerator.MSBuild.Test</AssemblyName>
     <IsPackable>false</IsPackable>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PxtlCa.XmlCommentMarkDownGenerator.MSBuild\PxtlCa.XmlCommentMarkDownGenerator.MSBuild.csproj" />
-    <ProjectReference Include="..\PxtlCa.XmlCommentMarkDownGenerator\PxtlCa.XmlCommentMarkDownGenerator.csproj" />
+    <ProjectReference Include="..\MkDocsSharp.XmlCommentMarkDownGenerator.MSBuild\MkDocsSharp.XmlCommentMarkDownGenerator.MSBuild.csproj" />
+    <ProjectReference Include="..\MkDocsSharp.XmlCommentMarkDownGenerator\MkDocsSharp.XmlCommentMarkDownGenerator.csproj" />
   </ItemGroup>
 
 </Project>

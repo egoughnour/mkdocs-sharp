@@ -1,4 +1,4 @@
-﻿# PxtlCa.BigVariant.Core #
+﻿# MkDocsSharp.BigVariant.Core #
 
 ## Type BigVariant
 
