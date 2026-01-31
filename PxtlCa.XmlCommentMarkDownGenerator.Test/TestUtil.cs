@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace PxtlCa.XmlCommentMarkDownGenerator.Test
 {
@@ -8,11 +7,13 @@ namespace PxtlCa.XmlCommentMarkDownGenerator.Test
         internal static string FetchResourceAsString(string resourceName)
         {
             var assembly = Assembly.GetExecutingAssembly();
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            using (StreamReader reader = new StreamReader(stream))
+            using Stream? stream = assembly.GetManifestResourceStream(resourceName);
+            if (stream == null)
             {
-                return reader.ReadToEnd();
+                throw new InvalidOperationException($"Resource '{resourceName}' not found.");
             }
+            using StreamReader reader = new StreamReader(stream);
+            return reader.ReadToEnd();
         }
     }
 }

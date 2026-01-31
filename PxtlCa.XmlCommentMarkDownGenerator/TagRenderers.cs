@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
 namespace PxtlCa.XmlCommentMarkDownGenerator
 {
     public class TagRenderer
     {
-        public TagRenderer(string formatString, Func<XElement, string, IEnumerable<string>> valueExtractor)
+        public TagRenderer(string formatString, Func<XElement, string?, IEnumerable<string>> valueExtractor)
         {
             FormatString = formatString;
             ValueExtractor = valueExtractor;
@@ -16,17 +14,17 @@ namespace PxtlCa.XmlCommentMarkDownGenerator
 
         public Func<
             XElement, //xml Element to extract from 
-            string, //assembly name
+            string?, //assembly name
             IEnumerable<string> //resultant list of values that will get used with formatString
         > ValueExtractor;
 
-        public static Dictionary<string, TagRenderer> Dict { get; } = new Dictionary<String, TagRenderer>()
+        public static Dictionary<string, TagRenderer> Dict { get; } = new Dictionary<string, TagRenderer>()
         {
             ["doc"] = new TagRenderer(
                 "# {0} #\n\n{1}\n\n",
                 (x, assemblyName) => new[]{
-                        x.Element("assembly").Element("name").Value,
-                        x.Element("members").Elements("member").ToMarkDown(x.Element("assembly").Element("name").Value)
+                        x.Element("assembly")?.Element("name")?.Value ?? "",
+                        x.Element("members")?.Elements("member").ToMarkDown(x.Element("assembly")?.Element("name")?.Value) ?? ""
                 }
             ),
             ["type"] = new TagRenderer(
@@ -109,12 +107,51 @@ namespace PxtlCa.XmlCommentMarkDownGenerator
                 " `{0}` ",
                 (x, assemblyName) => new[] { x.Nodes().ToMarkDown(assemblyName) }
             ),
+            // Modern XML doc tags
+            ["inheritdoc"] = new TagRenderer(
+                "*Inherits documentation from base.*\n\n",
+                (x, assemblyName) => Array.Empty<string>()
+            ),
+            ["see"] = new TagRenderer(
+                "[`{0}`]({0})",
+                (x, assemblyName) => new[] { x.Attribute("cref")?.Value?.ExtractLastPart() ?? x.Attribute("href")?.Value ?? x.Value ?? "" }
+            ),
+            ["seealso"] = new TagRenderer(
+                "**See also**: [`{0}`]({0})\n\n",
+                (x, assemblyName) => new[] { x.Attribute("cref")?.Value?.ExtractLastPart() ?? x.Attribute("href")?.Value ?? x.Value ?? "" }
+            ),
+            ["list"] = new TagRenderer(
+                "{0}\n\n",
+                (x, assemblyName) => new[] { x.Nodes().ToMarkDown(assemblyName) }
+            ),
+            ["item"] = new TagRenderer(
+                "- {0}\n",
+                (x, assemblyName) => new[] { x.Nodes().ToMarkDown(assemblyName) }
+            ),
+            ["term"] = new TagRenderer(
+                "**{0}**: ",
+                (x, assemblyName) => new[] { x.Nodes().ToMarkDown(assemblyName) }
+            ),
+            ["description"] = new TagRenderer(
+                "{0}",
+                (x, assemblyName) => new[] { x.Nodes().ToMarkDown(assemblyName) }
+            ),
+            ["listheader"] = new TagRenderer(
+                "{0}\n",
+                (x, assemblyName) => new[] { x.Nodes().ToMarkDown(assemblyName) }
+            ),
+            ["typeparamref"] = new TagRenderer(
+                "`{0}`",
+                (x, assemblyName) => new[] { x.Attribute("name")?.Value ?? "" }
+            ),
+            ["langword"] = new TagRenderer(
+                "`{0}`",
+                (x, assemblyName) => new[] { x.Attribute("cref")?.Value ?? x.Value ?? "" }
+            ),
             ["none"] = new TagRenderer(
                 "",
-                (x, assemblyName) => new string[0]
+                (x, assemblyName) => Array.Empty<string>()
             ),
         };
     }
-
-    
 }

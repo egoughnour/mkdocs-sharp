@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -26,7 +22,7 @@ namespace PxtlCa.XmlCommentMarkDownGenerator
                 .RemoveRedundantLineBreaks();
         }
 
-        private static Dictionary<string, string> _MemberNamePrefixDict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
+        private static readonly Dictionary<string, string> _MemberNamePrefixDict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
             ["F:"] = "Field",
             ["P:"] = "Property",
             ["T:"] = "Type",
@@ -34,11 +30,11 @@ namespace PxtlCa.XmlCommentMarkDownGenerator
             ["M:"] = "Method",
         };
 
-        public static string ToMarkDown(this XNode node, string assemblyName = null)
+        public static string ToMarkDown(this XNode node, string? assemblyName = null)
         {
-            if(node is XDocument)
+            if (node is XDocument xDoc)
             {
-                node = ((XDocument)node).Root;
+                node = xDoc.Root!;
             }
 
             string name;
@@ -48,16 +44,19 @@ namespace PxtlCa.XmlCommentMarkDownGenerator
                 name = el.Name.LocalName;
                 if (name == "member")
                 {
-                    string expandedName = null;
-                    if(!_MemberNamePrefixDict.TryGetValue(el.Attribute("name").Value.Substring(0,2), out expandedName))
+                    var memberName = el.Attribute("name")?.Value ?? "";
+                    string expandedName = "none";
+                    if (memberName.Length >= 2)
                     {
-                        expandedName = "none";
+                        _MemberNamePrefixDict.TryGetValue(memberName.Substring(0, 2), out expandedName!);
+                        expandedName ??= "none";
                     }
                     name = expandedName.ToLowerInvariant();
                 }
                 if (name == "see")
                 {
-                    var anchor = el.Attribute("cref") != null && el.Attribute("cref").Value.StartsWith("!:#");
+                    var cref = el.Attribute("cref")?.Value;
+                    var anchor = cref != null && cref.StartsWith("!:#");
                     name = anchor ? "seeAnchor" : "seePage";
                 }
                 //treat first Param element separately to add table headers.
@@ -71,14 +70,15 @@ namespace PxtlCa.XmlCommentMarkDownGenerator
                     name = "firstparam";
                 }
 
-                try { 
+                try
+                {
                     var vals = TagRenderer.Dict[name].ValueExtractor(el, assemblyName).ToArray();
                     return string.Format(TagRenderer.Dict[name].FormatString, args: vals);
                 }
-                catch(KeyNotFoundException ex)
+                catch (KeyNotFoundException ex)
                 {
                     var lineInfo = (IXmlLineInfo)node;
-                    throw new XmlException($@"Unknown element type ""{ name }""", ex, lineInfo.LineNumber, lineInfo.LinePosition);
+                    throw new XmlException($@"Unknown element type ""{name}""", ex, lineInfo.LineNumber, lineInfo.LinePosition);
                 }
             }
 
@@ -91,9 +91,12 @@ namespace PxtlCa.XmlCommentMarkDownGenerator
 
         private static readonly Regex _PrefixReplacerRegex = new Regex(@"(^[A-Z]\:)");
 
-        internal static string[] ExtractNameAndBodyFromMember(XElement node, string assemblyName)
+        internal static string[] ExtractNameAndBodyFromMember(XElement node, string? assemblyName)
         {
-            var newName = Regex.Replace(node.Attribute("name").Value, $@":{Regex.Escape(assemblyName)}\.", ":"); //remove leading namespace if it matches the assembly name
+            var attrValue = node.Attribute("name")?.Value ?? "";
+            var newName = string.IsNullOrEmpty(assemblyName) 
+                ? attrValue 
+                : Regex.Replace(attrValue, $@":{Regex.Escape(assemblyName)}\.", ":"); //remove leading namespace if it matches the assembly name
             //TODO: do same for function parameters
             newName = _PrefixReplacerRegex.Replace(newName, match => _MemberNamePrefixDict[match.Value] + " "); //expand prefixes into more verbose words for member.
             return new[]
@@ -103,16 +106,16 @@ namespace PxtlCa.XmlCommentMarkDownGenerator
                 };
         }
 
-        internal static string[] ExtractNameAndBody(string att, XElement node, string assemblyName)
+        internal static string[] ExtractNameAndBody(string att, XElement node, string? assemblyName)
         {
             return new[]
                {
-                    node.Attribute(att)?.Value,
+                    node.Attribute(att)?.Value ?? "",
                     node.Nodes().ToMarkDown(assemblyName)
                 };
         }
 
-        internal static string ToMarkDown(this IEnumerable<XNode> es, string assemblyName = null)
+        internal static string ToMarkDown(this IEnumerable<XNode> es, string? assemblyName = null)
         {
             return es.Aggregate("", (current, x) => current + x.ToMarkDown(assemblyName));
         }
@@ -120,6 +123,7 @@ namespace PxtlCa.XmlCommentMarkDownGenerator
         internal static string ToCodeBlock(this string s)
         {
             var lines = s.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            if (lines.Length == 0) return s;
             var blank = lines[0].TakeWhile(x => x == ' ').Count() - 4;
             return string.Join("\n", lines.Select(x => new string(x.SkipWhile((y, i) => i < blank).ToArray()))).TrimEnd();
         }
@@ -127,6 +131,18 @@ namespace PxtlCa.XmlCommentMarkDownGenerator
         static string RemoveRedundantLineBreaks(this string s)
         {
             return Regex.Replace(s, @"\n\n\n+", "\n\n");
+        }
+
+        /// <summary>
+        /// Extracts the last part of a fully-qualified member name (after the last dot).
+        /// </summary>
+        internal static string ExtractLastPart(this string s)
+        {
+            if (string.IsNullOrEmpty(s)) return s;
+            // Handle cref format like "T:Namespace.Class" or "M:Namespace.Class.Method"
+            var prefixRemoved = s.Length > 2 && s[1] == ':' ? s.Substring(2) : s;
+            var lastDot = prefixRemoved.LastIndexOf('.');
+            return lastDot >= 0 ? prefixRemoved.Substring(lastDot + 1) : prefixRemoved;
         }
     }
 }

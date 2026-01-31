@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.7.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.7.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\PxtlCa.XmlCommentMarkDownGenerator.MSBuild\PxtlCa.XmlCommentMarkDownGenerator.MSBuild.csproj" />
+    <ProjectReference Include="..\..\PxtlCa.XmlCommentMarkDownGenerator\PxtlCa.XmlCommentMarkDownGenerator.csproj" />
+    <ProjectReference Include="..\Example.XmlDocSamples\Example.XmlDocSamples.csproj" />
+  </ItemGroup>
+
+  <!-- Copy the XML documentation file from the referenced project -->
+  <Target Name="CopyXmlDocumentation" AfterTargets="Build">
+    <PropertyGroup>
+      <XmlDocSourcePath>$(MSBuildProjectDirectory)\..\Example.XmlDocSamples\bin\$(Configuration)\$(TargetFramework)\Example.XmlDocSamples.xml</XmlDocSourcePath>
+    </PropertyGroup>
+    <Copy SourceFiles="$(XmlDocSourcePath)"
+          DestinationFolder="$(OutputPath)"
+          Condition="Exists('$(XmlDocSourcePath)')" />
+  </Target>
+
+</Project>
