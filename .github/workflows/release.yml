@@ -37,9 +37,8 @@ jobs:
           perl -0pi -e "s/<version>[^<]*<\\/version>/<version>${VERSION}<\\/version>/" MkDocsSharp.MDGen.nuspec
       - name: Build and pack
         run: |
-          dotnet build --configuration Release
-          dotnet pack MkDocsSharp.MDGen/MkDocsSharp.MDGen.csproj --configuration Release --output artifacts /p:Version=${{ env.VERSION }}
-          dotnet pack MkDocsSharp.MDGen.MSBuild/MkDocsSharp.MDGen.MSBuild.csproj --configuration Release --output artifacts /p:Version=${{ env.VERSION }}
+          dotnet build MkDocsSharp.MDGen.slnx -c Release
+          dotnet pack MkDocsSharp.MDGen.MSBuild/MkDocsSharp.MDGen.MSBuild.csproj -c Release -o artifacts --no-build
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
