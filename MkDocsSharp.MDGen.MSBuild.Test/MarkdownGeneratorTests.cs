@@ -1,8 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MkDocsSharp.XmlCommentMarkDownGenerator.MSBuild;
+using MkDocsSharp.MDGen.MSBuild;
 using System.Xml;
 
-namespace MkDocsSharp.XmlCommentMarkDownGenerator.MSBuild.Test
+namespace MkDocsSharp.MDGen.MSBuild.Test
 {
     /// <summary>
     /// Simple test logger that collects errors and warnings

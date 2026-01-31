@@ -2,9 +2,9 @@ using System.Xml.Linq;
 using System.Xml;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
-using MkDocsSharp.XmlCommentMarkDownGenerator.MSBuild.Options;
+using MkDocsSharp.MDGen.MSBuild.Options;
 
-namespace MkDocsSharp.XmlCommentMarkDownGenerator.MSBuild
+namespace MkDocsSharp.MDGen.MSBuild
 {
     /// <summary>
     /// Logging interface to abstract MSBuild logging

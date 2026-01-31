@@ -4,8 +4,8 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <LangVersion>12.0</LangVersion>
-    <RootNamespace>MkDocsSharp.XmlCommentMarkDownGenerator</RootNamespace>
-    <AssemblyName>MkDocsSharp.XmlCommentMarkDownGenerator</AssemblyName>
+    <RootNamespace>MkDocsSharp.MDGen</RootNamespace>
+    <AssemblyName>MkDocsSharp.MDGen</AssemblyName>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>

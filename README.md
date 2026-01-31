@@ -1,6 +1,6 @@
-# MkDocsSharp.XmlCommentMarkDownGenerator
+# MkDocsSharp.MDGen
 
-Usage: MkDocsSharp.XmlCommentMarkDownGenerator -i InputFileName.xml -o OutputFileName.md
+Usage: MkDocsSharp.MDGen -i InputFileName.xml -o OutputFileName.md
 
   -i, --inputfile     Input xml file to read.
 
@@ -12,13 +12,13 @@ Usage: MkDocsSharp.XmlCommentMarkDownGenerator -i InputFileName.xml -o OutputFil
 
   --help              Display this help screen.
 
-Execute MkDocsSharp.XmlCommentMarkDownGenerator.exe --help for usage if the above is out-of-date.
+Execute MkDocsSharp.MDGen.exe --help for usage if the above is out-of-date.
 
 Generates MkDocs-friendly Markdown from VS XML documentation files. Forked from https://gist.github.com/lontivero/593fc51f1208555112e0 
 
 Can be used as a stand-alone Markdown command-line tool, but is also available as a NuGet package.  
 
-https://www.nuget.org/packages/MkDocsSharp.XmlCommentMarkDownGenerator
+https://www.nuget.org/packages/MkDocsSharp.MDGen
 
 When used as a nuget package, it will add an MSBuild task to your project to automatically convert generated xml into markdown file stored in Docs at the project level.  It will also merge any existing markdown files in Docs with the converted markdown. Takes multiple input xml files. 
 

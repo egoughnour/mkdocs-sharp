@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace MkDocsSharp.XmlCommentMarkDownGenerator
+namespace MkDocsSharp.MDGen
 {
     class Options
     {

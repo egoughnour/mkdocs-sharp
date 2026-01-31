@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 using CommandLine;
 
-namespace MkDocsSharp.XmlCommentMarkDownGenerator
+namespace MkDocsSharp.MDGen
 {
     class Program
     {

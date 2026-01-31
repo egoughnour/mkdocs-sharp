@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+	<metadata>
+		<id>MkDocsSharp.MDGen</id>
+		<version>0.3.0.0</version>
+		<title>MkDocsSharp.MDGen</title>
+		<authors>Martin Zarate</authors>
+		<licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Convert Visual Studio generated XML comment files into MkDocs-friendly Markdown.</description>
+		<copyright>2016 Martin Zarate</copyright>
+	</metadata>
+	<files>
+		<file src="MkDocsSharp.MDGen\bin\Debug\MkDocsSharp.MDGen.exe" target="tools\MkDocsSharp.MDGen.exe" />
+		<file src="MkDocsSharp.MDGen.MSBuild\bin\Debug\MkDocsSharp.MDGen.MSBuild.dll" target="tools\MkDocsSharp.MDGen.MSBuild.dll" />
+		<file src="MkDocsSharp.MDGen\bin\Debug\CommandLine.dll" target="tools\CommandLine.dll" />
+		<file src="MkDocsSharp.MDGen.targets" target="build\MkDocsSharp.MDGen.targets" />
+	</files>
+</package>

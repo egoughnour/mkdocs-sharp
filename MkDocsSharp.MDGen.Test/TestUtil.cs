@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace MkDocsSharp.XmlCommentMarkDownGenerator.Test
+namespace MkDocsSharp.MDGen.Test
 {
     internal static class TestUtil
     {

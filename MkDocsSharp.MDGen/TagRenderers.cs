@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace MkDocsSharp.XmlCommentMarkDownGenerator
+namespace MkDocsSharp.MDGen
 {
     public class TagRenderer
     {

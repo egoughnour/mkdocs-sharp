@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Text.RegularExpressions;
 
-namespace MkDocsSharp.XmlCommentMarkDownGenerator.Test
+namespace MkDocsSharp.MDGen.Test
 {
     [TestClass]
     public class Regression
@@ -9,8 +9,8 @@ namespace MkDocsSharp.XmlCommentMarkDownGenerator.Test
         [TestMethod]
         public void TestBigVariantXml()
         {
-            var inputResourceName = "MkDocsSharp.XmlCommentMarkDownGenerator.Test.RegressionBigVariant_input.xml";
-            var outputResourceName = "MkDocsSharp.XmlCommentMarkDownGenerator.Test.RegressionBigVariant_output.md";
+            var inputResourceName = "MkDocsSharp.MDGen.Test.RegressionBigVariant_input.xml";
+            var outputResourceName = "MkDocsSharp.MDGen.Test.RegressionBigVariant_output.md";
             Regex normalizeSpace = new Regex(@"\s+", RegexOptions.Compiled);
             var testInput = TestUtil.FetchResourceAsString(inputResourceName);
 
@@ -23,7 +23,7 @@ namespace MkDocsSharp.XmlCommentMarkDownGenerator.Test
         [ExpectedException(typeof(System.Xml.XmlException))]
         public void TestUnexpectedElement()
         {
-            var inputResourceName = "MkDocsSharp.XmlCommentMarkDownGenerator.Test.UnexpectedElement_input.xml";
+            var inputResourceName = "MkDocsSharp.MDGen.Test.UnexpectedElement_input.xml";
             Regex normalizeSpace = new Regex(@"\s+", RegexOptions.Compiled);
             var testInput = TestUtil.FetchResourceAsString(inputResourceName);
             

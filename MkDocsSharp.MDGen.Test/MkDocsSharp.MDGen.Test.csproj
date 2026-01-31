@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>MkDocsSharp.XmlCommentMarkDownGenerator.Test</RootNamespace>
-    <AssemblyName>MkDocsSharp.XmlCommentMarkDownGenerator.Test</AssemblyName>
+    <RootNamespace>MkDocsSharp.MDGen.Test</RootNamespace>
+    <AssemblyName>MkDocsSharp.MDGen.Test</AssemblyName>
     <IsPackable>false</IsPackable>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MkDocsSharp.XmlCommentMarkDownGenerator\MkDocsSharp.XmlCommentMarkDownGenerator.csproj" />
+    <ProjectReference Include="..\MkDocsSharp.MDGen\MkDocsSharp.MDGen.csproj" />
   </ItemGroup>
 
 </Project>

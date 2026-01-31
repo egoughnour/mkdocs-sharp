@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <LangVersion>12.0</LangVersion>
-    <RootNamespace>MkDocsSharp.XmlCommentMarkDownGenerator.MSBuild</RootNamespace>
-    <AssemblyName>MkDocsSharp.XmlCommentMarkDownGenerator.MSBuild</AssemblyName>
+    <RootNamespace>MkDocsSharp.MDGen.MSBuild</RootNamespace>
+    <AssemblyName>MkDocsSharp.MDGen.MSBuild</AssemblyName>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MkDocsSharp.XmlCommentMarkDownGenerator\MkDocsSharp.XmlCommentMarkDownGenerator.csproj" />
+    <ProjectReference Include="..\MkDocsSharp.MDGen\MkDocsSharp.MDGen.csproj" />
   </ItemGroup>
 
 </Project>
