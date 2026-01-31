@@ -1,0 +1,16 @@
+<Project>
+  <PropertyGroup>
+    <RootDir>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..'))</RootDir>
+    <SolutionFile>$(RootDir)\MkDocsSharp.MDGen.sln</SolutionFile>
+    <PackProject>$(RootDir)\MkDocsSharp.MDGen.MSBuild\MkDocsSharp.MDGen.MSBuild.csproj</PackProject>
+    <ArtifactsDir>$(RootDir)\artifacts</ArtifactsDir>
+    <Configuration Condition="'$(Configuration)'==''">Release</Configuration>
+  </PropertyGroup>
+
+  <Target Name="Pack">
+    <Message Text="Building $(SolutionFile) ($(Configuration))" Importance="high" />
+    <MSBuild Projects="$(SolutionFile)" Targets="Build" Properties="Configuration=$(Configuration)" />
+    <MakeDir Directories="$(ArtifactsDir)" />
+    <Exec Command="dotnet pack &quot;$(PackProject)&quot; -c $(Configuration) -o &quot;$(ArtifactsDir)&quot; -p:NoBuild=true" />
+  </Target>
+</Project>

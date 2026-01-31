@@ -1,0 +1,55 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release (e.g., 1.2.3)"
+        required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment:
+      name: nugetorg
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Resolve version
+        id: version
+        shell: bash
+        run: |
+          if [[ -n "${{ github.event.inputs.version }}" ]]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            VERSION="${GITHUB_REF_NAME#v}"
+          fi
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          perl -0pi -e "s/<version>[^<]*<\\/version>/<version>${VERSION}<\\/version>/" MkDocsSharp.MDGen.nuspec
+      - name: Build and pack
+        run: |
+          dotnet build --configuration Release
+          dotnet pack MkDocsSharp.MDGen/MkDocsSharp.MDGen.csproj --configuration Release --output artifacts /p:Version=${{ env.VERSION }}
+          dotnet pack MkDocsSharp.MDGen.MSBuild/MkDocsSharp.MDGen.MSBuild.csproj --configuration Release --output artifacts /p:Version=${{ env.VERSION }}
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ env.VERSION }}
+          name: v${{ env.VERSION }}
+          target_commitish: ${{ github.sha }}
+          files: artifacts/*.nupkg
+      - name: NuGet login
+        uses: nuget/login@v1
+        with:
+          user: egoughnour
+      - name: Publish to NuGet
+        run: dotnet nuget push "artifacts/*.nupkg" -s https://api.nuget.org/v3/index.json

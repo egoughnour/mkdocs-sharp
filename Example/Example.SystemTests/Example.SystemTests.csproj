@@ -14,20 +14,4 @@
     <PackageReference Include="MSTest.TestFramework" Version="3.7.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\MkDocsSharp.MDGen.MSBuild\MkDocsSharp.MDGen.MSBuild.csproj" />
-    <ProjectReference Include="..\..\MkDocsSharp.MDGen\MkDocsSharp.MDGen.csproj" />
-    <ProjectReference Include="..\Example.XmlDocSamples\Example.XmlDocSamples.csproj" />
-  </ItemGroup>
-
-  <!-- Copy the XML documentation file from the referenced project -->
-  <Target Name="CopyXmlDocumentation" AfterTargets="Build">
-    <PropertyGroup>
-      <XmlDocSourcePath>$(MSBuildProjectDirectory)\..\Example.XmlDocSamples\bin\$(Configuration)\$(TargetFramework)\Example.XmlDocSamples.xml</XmlDocSourcePath>
-    </PropertyGroup>
-    <Copy SourceFiles="$(XmlDocSourcePath)"
-          DestinationFolder="$(OutputPath)"
-          Condition="Exists('$(XmlDocSourcePath)')" />
-  </Target>
-
 </Project>

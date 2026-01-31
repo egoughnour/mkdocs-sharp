@@ -1,0 +1,35 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore
+        run: dotnet restore MkDocsSharp.MDGen.sln
+      - name: Build
+        run: dotnet build MkDocsSharp.MDGen.sln -c Release --no-restore
+      - name: Pack
+        run: dotnet msbuild build/pack.proj /t:Pack /p:Configuration=Release
+      - name: Test
+        run: dotnet test MkDocsSharp.MDGen.sln -c Release --no-build
+
+      # Test the example/sample project that consumes the package
+      - name: Create local NuGet source
+        run: |
+          mkdir -p ~/.nuget/local-packages
+          cp artifacts/*.nupkg ~/.nuget/local-packages/ || cp build/artifacts/*.nupkg ~/.nuget/local-packages/ || true
+          dotnet nuget add source ~/.nuget/local-packages --name local-packages || true
+      - name: Restore UserCode solution
+        run: dotnet restore UserCode.sln
+      - name: Build UserCode solution
+        run: dotnet build UserCode.sln -c Release --no-restore
+      - name: Test UserCode solution
+        run: dotnet test UserCode.sln -c Release --no-build

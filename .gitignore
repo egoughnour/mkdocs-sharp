@@ -24,6 +24,7 @@ bld/
 
 # Visual Studio 2015 cache/options directory
 .vs/
+.vscode/
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
@@ -253,6 +254,6 @@ paket-files/
 # SSDT artifacts
 Model.xml
 *.FileListAbsolute.txt
-PxtlCa.XmlCommentMarkdownGenerator.MSBuild.Test/Readme.md
-PxtlCa.XmlCommentMarkdownGenerator.MSBuild.Test/Docs/PxtlCa.XmlCommentMarkDownGenerator.MSBuild_altered.md
-PxtlCa.XmlCommentMarkdownGenerator.MSBuild.Test/Docs/PxtlCa.XmlCommentMarkDownGenerator.MSBuild.md
+MkDocsSharp.MDGen.MSBuild.Test/Readme.md
+MkDocsSharp.MDGen.MSBuild.Test/Docs/MkDocsSharp.MDGen.MSBuild_altered.md
+MkDocsSharp.MDGen.MSBuild.Test/Docs/MkDocsSharp.MDGen.MSBuild.md

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <UsingTask TaskName="GenerateMarkdown" AssemblyFile="$(MSBuildThisFileDirectory)\..\Tools\MkDocsSharp.MDGen.MSBuild.dll" />
+  <UsingTask TaskName="GenerateMarkdown" AssemblyFile="$(MSBuildThisFileDirectory)\..\tools\MkDocsSharp.MDGen.MSBuild.dll" />
   <Target Name="AfterBuild">
     <Warning
       Condition="!Exists('$(MSBuildProjectDirectory)\$(OutputPath)\$(AssemblyName).xml')"
