@@ -254,6 +254,4 @@ paket-files/
 # SSDT artifacts
 Model.xml
 *.FileListAbsolute.txt
-MkDocsSharp.MDGen.MSBuild.Test/Readme.md
-MkDocsSharp.MDGen.MSBuild.Test/Docs/MkDocsSharp.MDGen.MSBuild_altered.md
-MkDocsSharp.MDGen.MSBuild.Test/Docs/MkDocsSharp.MDGen.MSBuild.md
+MkDocsSharp.MDGen.MSBuild.Test/docs/

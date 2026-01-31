@@ -1,17 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
 	<metadata>
 		<id>MkDocsSharp.MDGen</id>
 		<version>0.0.0-placeholder</version>
 		<title>MkDocsSharp.MDGen</title>
-		<authors>Martin Zarate</authors>
-		<licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+		<authors>Erik Goughnour</authors>
+		<license type="expression">MIT</license>
+		<projectUrl>https://github.com/egoughnour/mkdocs-sharp</projectUrl>
+		<repository type="git" url="https://github.com/egoughnour/mkdocs-sharp.git" />
+		<icon>images\icon.png</icon>
+		<readme>docs\README.md</readme>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>Convert Visual Studio generated XML comment files into MkDocs-friendly Markdown.</description>
-		<copyright>2016 Martin Zarate</copyright>
+		<description>MSBuild task that automatically converts C# XML documentation comments into MkDocs-friendly Markdown. Integrates seamlessly into your build process.</description>
+		<copyright>mkdocs-sharp contributors</copyright>
+		<tags>dotnet csharp xml documentation markdown mkdocs readthedocs msbuild api-docs docfx</tags>
 	</metadata>
 	<files>
 		<file src="MkDocsSharp.MDGen.MSBuild\bin\Release\net8.0\*" target="tools" />
 		<file src="MkDocsSharp.MDGen.targets" target="build\MkDocsSharp.MDGen.targets" />
+		<file src="icon.png" target="images\" />
+		<file src="README.md" target="docs\" />
 	</files>
 </package>

@@ -34,7 +34,7 @@ public class DocumentGenerationTests
         _tempProjectDir = Path.Combine(Path.GetTempPath(), $"MDGenSample_{Guid.NewGuid():N}");
         CopyDirectory(sourceProjectDir, _tempProjectDir);
 
-        var docsDir = Path.Combine(_tempProjectDir, "Docs");
+        var docsDir = Path.Combine(_tempProjectDir, "docs");
         Directory.CreateDirectory(docsDir);
         var existingDocPath = Path.Combine(docsDir, "README.md");
         File.WriteAllText(existingDocPath, $@"# Example API Documentation
@@ -49,10 +49,10 @@ public class DocumentGenerationTests
         RunProcess("dotnet", $"restore \"{csprojPath}\" --source \"{artifactsDir}\"", _tempProjectDir);
         RunProcess("dotnet", $"build \"{csprojPath}\" -c Release --no-restore", _tempProjectDir);
 
-        var readmePath = Path.Combine(_tempProjectDir, "Readme.md");
+        var readmePath = Path.Combine(_tempProjectDir, "docs", "index.md");
         if (!File.Exists(readmePath))
         {
-            Assert.Inconclusive($"Generated Readme.md not found at {readmePath}");
+            Assert.Inconclusive($"Generated docs/index.md not found at {readmePath}");
             return;
         }
 
@@ -103,7 +103,7 @@ public class DocumentGenerationTests
     public void GenerateMarkdown_WithMerge_CombinesWithExistingDocs()
     {
         var mdContent = GetReadmeContent();
-        Assert.IsTrue(mdContent.Contains(MergeMarker), "Should contain original content from Docs");
+        Assert.IsTrue(mdContent.Contains(MergeMarker), "Should contain original content from docs");
     }
 
     [TestMethod]

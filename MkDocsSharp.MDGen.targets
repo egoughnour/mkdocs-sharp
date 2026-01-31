@@ -7,11 +7,11 @@
       Text="MkDocsSharp.MDGen can't generate Markdown: Can't find Xml file matching assembly name.  Please confirm that your project file is configured to output the Xml documentation file in this build configuration."
       File="$(MSBuildProjectDirectory)\$(OutputPath)\$(AssemblyName).xml"
     />
-    <GenerateMarkdown 
+    <GenerateMarkdown
       InputXml="$(MSBuildProjectDirectory)\$(OutputPath)\$(AssemblyName).xml"
-      DocumentationPath="$(MSBuildProjectDirectory)\Docs"
+      DocumentationPath="$(MSBuildProjectDirectory)\docs"
       MergeFiles="true"
-      OutputFile="$(MSBuildProjectDirectory)\Readme.md"
+      OutputFile="$(MSBuildProjectDirectory)\docs\index.md"
     />
   </Target>
 </Project>
