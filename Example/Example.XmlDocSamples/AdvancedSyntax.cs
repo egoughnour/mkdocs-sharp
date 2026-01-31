@@ -512,6 +512,7 @@ public class ConstructorExamples
     public static ConstructorExamples Create(string name, int value) => new(name, value);
 }
 
+#if CSHARP12_OR_GREATER
 /// <summary>
 /// Demonstrates primary constructor syntax (C# 12+).
 /// </summary>
@@ -534,3 +535,4 @@ public class PrimaryConstructorExample(string name, int value)
     /// </summary>
     public string Display => $"{Name}: {Value}";
 }
+#endif

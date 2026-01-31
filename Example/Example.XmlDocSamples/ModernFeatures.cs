@@ -120,6 +120,7 @@ public class NullableExamples
 // INIT-ONLY AND REQUIRED MEMBERS
 // =============================================================================
 
+#if CSHARP11_OR_GREATER
 /// <summary>
 /// Demonstrates init-only and required properties.
 /// </summary>
@@ -145,11 +146,13 @@ public class InitOnlyExample
     /// </summary>
     public bool IsActive { get; set; }
 }
+#endif
 
 // =============================================================================
 // FILE-SCOPED TYPES (C# 11+)
 // =============================================================================
 
+#if CSHARP11_OR_GREATER
 /// <summary>
 /// A public class that uses file-local helpers.
 /// </summary>
@@ -178,11 +181,13 @@ file static class FileLocalHelper
     /// <returns>The transformed output.</returns>
     public static string Transform(string input) => input.ToUpperInvariant();
 }
+#endif
 
 // =============================================================================
 // COLLECTION EXPRESSIONS (C# 12+)
 // =============================================================================
 
+#if CSHARP12_OR_GREATER
 /// <summary>
 /// Demonstrates collection expressions and patterns.
 /// </summary>
@@ -208,11 +213,13 @@ public static class CollectionExamples
     /// <returns>A combined list.</returns>
     public static List<int> Combine(int[] first, int[] second) => [.. first, .. second];
 }
+#endif
 
 // =============================================================================
 // RAW STRING LITERALS (C# 11+)
 // =============================================================================
 
+#if CSHARP11_OR_GREATER
 /// <summary>
 /// Demonstrates raw string literals.
 /// </summary>
@@ -248,11 +255,13 @@ public static class RawStringExamples
         ORDER BY u.Name
         """;
 }
+#endif
 
 // =============================================================================
 // STATIC ABSTRACT INTERFACE MEMBERS (C# 11+)
 // =============================================================================
 
+#if CSHARP11_OR_GREATER
 /// <summary>
 /// An interface with static abstract members.
 /// </summary>
@@ -320,11 +329,13 @@ public readonly struct Temperature : IParsable<Temperature>
     /// <inheritdoc/>
     public override string ToString() => $"{Celsius}°C";
 }
+#endif
 
 // =============================================================================
 // GENERIC MATH (C# 11+)
 // =============================================================================
 
+#if NET7_0_OR_GREATER
 /// <summary>
 /// Demonstrates generic math interfaces.
 /// </summary>
@@ -362,6 +373,7 @@ public static class GenericMathExamples
         return sum / count;
     }
 }
+#endif
 
 // =============================================================================
 // DISPOSABLE PATTERNS

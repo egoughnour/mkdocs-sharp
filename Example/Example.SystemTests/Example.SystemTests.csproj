@@ -1,10 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
+    <LangVersion>10.0</LangVersion>
+    <DefineConstants>$(DefineConstants);CSHARP10;CSHARP10_OR_GREATER</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net7.0'">
+    <LangVersion>11.0</LangVersion>
+    <DefineConstants>$(DefineConstants);CSHARP11;CSHARP11_OR_GREATER;CSHARP10_OR_GREATER</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net8.0'">
+    <LangVersion>12.0</LangVersion>
+    <DefineConstants>$(DefineConstants);CSHARP12;CSHARP12_OR_GREATER;CSHARP11_OR_GREATER;CSHARP10_OR_GREATER</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +28,7 @@
     <PackageReference Include="MSTest.TestFramework" Version="3.7.2" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='net8.0'">
     <ProjectReference Include="..\..\PxtlCa.XmlCommentMarkDownGenerator.MSBuild\PxtlCa.XmlCommentMarkDownGenerator.MSBuild.csproj" />
     <ProjectReference Include="..\..\PxtlCa.XmlCommentMarkDownGenerator\PxtlCa.XmlCommentMarkDownGenerator.csproj" />
     <ProjectReference Include="..\Example.XmlDocSamples\Example.XmlDocSamples.csproj" />
