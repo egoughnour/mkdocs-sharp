@@ -11,7 +11,6 @@
 		<copyright>2016 Martin Zarate</copyright>
 	</metadata>
 	<files>
-		<file src="MkDocsSharp.MDGen\bin\Release\net8.0\*" target="tools" />
 		<file src="MkDocsSharp.MDGen.MSBuild\bin\Release\net8.0\*" target="tools" />
 		<file src="MkDocsSharp.MDGen.targets" target="build\MkDocsSharp.MDGen.targets" />
 	</files>

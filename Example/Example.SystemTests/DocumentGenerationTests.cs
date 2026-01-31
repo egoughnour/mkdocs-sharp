@@ -26,7 +26,7 @@ public class DocumentGenerationTests
         var nupkgPath = Path.Combine(artifactsDir, $"MkDocsSharp.MDGen.{version}.nupkg");
         if (!File.Exists(nupkgPath))
         {
-            Assert.Inconclusive($"Package not found: {nupkgPath}. Run: dotnet msbuild build/pack.proj /t:Pack");
+            Assert.Inconclusive($"Package not found: {nupkgPath}. Run: dotnet pack MkDocsSharp.MDGen.MSBuild -c Release -o artifacts");
             return;
         }
 

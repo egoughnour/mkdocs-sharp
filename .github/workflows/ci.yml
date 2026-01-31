@@ -17,7 +17,7 @@ jobs:
       - name: Build
         run: dotnet build MkDocsSharp.MDGen.slnx -c Release --no-restore
       - name: Pack
-        run: dotnet msbuild build/pack.proj /t:Pack /p:Configuration=Release
+        run: dotnet pack MkDocsSharp.MDGen.MSBuild/MkDocsSharp.MDGen.MSBuild.csproj -c Release -o artifacts --no-build
       - name: Test
         run: dotnet test MkDocsSharp.MDGen.slnx -c Release --no-build
 
@@ -25,7 +25,7 @@ jobs:
       - name: Create local NuGet source
         run: |
           mkdir -p ~/.nuget/local-packages
-          cp artifacts/*.nupkg ~/.nuget/local-packages/ || cp build/artifacts/*.nupkg ~/.nuget/local-packages/ || true
+          cp artifacts/*.nupkg ~/.nuget/local-packages/
           dotnet nuget add source ~/.nuget/local-packages --name local-packages || true
       - name: Restore UserCode solution
         run: dotnet restore UserCode.sln
