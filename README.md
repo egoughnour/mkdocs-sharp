@@ -1,60 +1,93 @@
 # MkDocsSharp.MDGen
 
-Usage: MkDocsSharp.MDGen -i InputFileName.xml -o OutputFileName.md
+[![NuGet](https://img.shields.io/nuget/v/MkDocsSharp.MDGen.svg)](https://www.nuget.org/packages/MkDocsSharp.MDGen)
+[![CI](https://github.com/egoughnour/mkdocs-sharp/actions/workflows/ci.yml/badge.svg)](https://github.com/egoughnour/mkdocs-sharp/actions/workflows/ci.yml)
 
-  -i, --inputfile     Input xml file to read.
+Automatically generate MkDocs-friendly Markdown from your C# XML documentation comments. Runs as an MSBuild task during your build process.
 
-  --cin               Read input from console instead of file.
+## Installation
 
-  -o, --outputfile    Output md file to write.
-
-  --cout              Write output to console instead of file.
-
-  --help              Display this help screen.
-
-Execute MkDocsSharp.MDGen.exe --help for usage if the above is out-of-date.
-
-Generates MkDocs-friendly Markdown from VS XML documentation files. Forked from https://gist.github.com/lontivero/593fc51f1208555112e0 
-
-Can be used as a stand-alone Markdown command-line tool, but is also available as a NuGet package.  
-
-https://www.nuget.org/packages/MkDocsSharp.MDGen
-
-When used as a nuget package, it will add an MSBuild task to your project to automatically convert generated xml into markdown file stored in Docs at the project level.  It will also merge any existing markdown files in Docs with the converted markdown. Takes multiple input xml files. 
-
-(note: the above nuget target was broken after 0.1.5977.1837 because I forgot to commit the nuspec line that does it.  Oops.  Fixed in 0.2.6130.564)
-
-You must have XML documentation output enabled for your project in both debug and release configurations or it will warn that it can't find the file.
-
-## Packaging and release
-
-Pack (Release build into `artifacts/`):
-
-```
-dotnet msbuild build/pack.proj /t:Pack
+```bash
+dotnet add package MkDocsSharp.MDGen
 ```
 
-Release (updates nuspec, packs, tags, creates a GitHub release, pushes to NuGet):
+## Quick Start
 
-```
-./build/release.sh 1.2.3
-```
+1. Enable XML documentation in your project:
 
-Or PowerShell:
-
-```
-./build/release.ps1 -Version 1.2.3
+```xml
+<PropertyGroup>
+  <GenerateDocumentationFile>true</GenerateDocumentationFile>
+</PropertyGroup>
 ```
 
-Set `NUGET_API_KEY` (or pass `-NuGetApiKey`) and install `gh` if you want the script to create a GitHub release.
+2. Build your project. The package automatically generates `docs/index.md` from your XML docs.
 
-### GitHub Actions
+That's it! Your XML documentation comments are now converted to Markdown on every build, ready for MkDocs.
 
-- CI: runs on every push/PR and builds/tests the solution.
-- Release: push a tag like `v1.2.3` or run the workflow with a version input.  
-  Requires a `NUGET_API_KEY` secret in the repo to publish to nuget.org.
+## Features
 
-### Solutions
+- Converts all standard XML documentation tags (`<summary>`, `<param>`, `<returns>`, `<example>`, etc.)
+- Outputs directly to `docs/` for seamless MkDocs integration
+- Merges generated docs with existing Markdown files in `docs/`
+- Supports cross-references with `<see cref="..."/>` converted to Markdown links
+- Handles generic types, interfaces, enums, records, and structs
+- Runs automatically as part of your build process
 
-- `MkDocsSharp.MDGen.slnx` contains the shipping projects.
-- `UserCode.sln` contains the sample and its tests (kept out of packaging).
+## Configuration
+
+The default behavior works for most projects. The generated output goes to `docs/index.md`, and any existing `.md` files in `docs/` are merged into the output.
+
+To customize, you can override the MSBuild target in your `.csproj`:
+
+```xml
+<Target Name="AfterBuild" DependsOnTargets="GenerateMarkdownDocs">
+  <GenerateMarkdown
+    InputXml="$(OutputPath)$(AssemblyName).xml"
+    DocumentationPath="$(MSBuildProjectDirectory)\Docs"
+    MergeFiles="true"
+    OutputFile="$(MSBuildProjectDirectory)\API.md"
+    WarnOnUnexpectedTag="true"
+  />
+</Target>
+```
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `InputXml` | `$(OutputPath)$(AssemblyName).xml` | XML documentation file(s) to process |
+| `DocumentationPath` | `docs` | Folder containing existing Markdown to merge |
+| `MergeFiles` | `true` | Whether to merge with existing docs |
+| `OutputFile` | `docs/index.md` | Output Markdown file path |
+| `WarnOnUnexpectedTag` | `false` | Warn on unrecognized XML tags |
+
+## CLI Usage
+
+The package also includes a standalone command-line tool:
+
+```bash
+MkDocsSharp.MDGen -i MyAssembly.xml -o API.md
+```
+
+| Option | Description |
+|--------|-------------|
+| `-i`, `--inputfile` | Input XML file |
+| `-o`, `--outputfile` | Output Markdown file |
+| `--cin` | Read from stdin |
+| `--cout` | Write to stdout |
+
+## Requirements
+
+- .NET 8.0 or later
+- XML documentation enabled in your project
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and release process.
+
+## License
+
+MIT - see [LICENSE](LICENSE) for details.
+
+---
+
+Originally forked from [lontivero's gist](https://gist.github.com/lontivero/593fc51f1208555112e0).
