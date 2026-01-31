@@ -28,12 +28,11 @@ public class XmlDocCoverageTests
         var sourceFiles = Directory.GetFiles(_projectPath, "*.cs", SearchOption.AllDirectories)
             .Where(f => !f.Contains("obj") && !f.Contains("bin"));
 
-        var parseOptions = CreateParseOptions();
         var syntaxTrees = sourceFiles.Select(file =>
             CSharpSyntaxTree.ParseText(
                 File.ReadAllText(file),
                 path: file,
-                options: parseOptions));
+                options: new CSharpParseOptions(LanguageVersion.CSharp12)));
 
         var references = AppDomain.CurrentDomain.GetAssemblies()
             .Where(a => !a.IsDynamic && !string.IsNullOrEmpty(a.Location))
@@ -47,59 +46,6 @@ public class XmlDocCoverageTests
             new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
     }
 
-    private static CSharpParseOptions CreateParseOptions()
-    {
-        return new CSharpParseOptions(
-            GetLanguageVersion(),
-            preprocessorSymbols: GetPreprocessorSymbols());
-    }
-
-    private static LanguageVersion GetLanguageVersion()
-    {
-#if NET8_0
-        return LanguageVersion.CSharp12;
-#elif NET7_0
-        return LanguageVersion.CSharp11;
-#elif NET6_0
-        return LanguageVersion.CSharp10;
-#else
-        return LanguageVersion.Latest;
-#endif
-    }
-
-    private static IEnumerable<string> GetPreprocessorSymbols()
-    {
-#if NET8_0
-        return new[]
-        {
-            "CSHARP12",
-            "CSHARP12_OR_GREATER",
-            "CSHARP11_OR_GREATER",
-            "CSHARP10_OR_GREATER",
-            "NET8_0_OR_GREATER",
-            "NET7_0_OR_GREATER",
-            "NET6_0_OR_GREATER"
-        };
-#elif NET7_0
-        return new[]
-        {
-            "CSHARP11",
-            "CSHARP11_OR_GREATER",
-            "CSHARP10_OR_GREATER",
-            "NET7_0_OR_GREATER",
-            "NET6_0_OR_GREATER"
-        };
-#elif NET6_0
-        return new[]
-        {
-            "CSHARP10",
-            "CSHARP10_OR_GREATER",
-            "NET6_0_OR_GREATER"
-        };
-#else
-        return Array.Empty<string>();
-#endif
-    }
 
     [TestMethod]
     public void AllPublicTypesHaveXmlDocumentation()
