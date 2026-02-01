@@ -1,5 +1,7 @@
 # MkDocsSharp.MDGen
 
+[![BannerOrSplash](banner_or_splash.png)](banner_or_splash.png)
+
 [![NuGet](https://img.shields.io/nuget/v/MkDocsSharp.MDGen.svg)](https://www.nuget.org/packages/MkDocsSharp.MDGen)
 [![CI](https://github.com/egoughnour/mkdocs-sharp/actions/workflows/ci.yml/badge.svg)](https://github.com/egoughnour/mkdocs-sharp/actions/workflows/ci.yml)
 
