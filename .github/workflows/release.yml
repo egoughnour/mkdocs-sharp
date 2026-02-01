@@ -13,8 +13,6 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    environment:
-      name: nugetorg
     permissions:
       contents: write
       id-token: write
