@@ -13,11 +13,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    environment:
-      name: nugetorg
     permissions:
       contents: write
-      id-token: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
@@ -46,9 +43,5 @@ jobs:
           name: v${{ env.VERSION }}
           target_commitish: ${{ github.sha }}
           files: artifacts/*.nupkg
-      - name: NuGet login
-        uses: nuget/login@v1
-        with:
-          user: egoughnour
       - name: Publish to NuGet
-        run: dotnet nuget push "artifacts/*.nupkg" -s https://api.nuget.org/v3/index.json
+        run: dotnet nuget push "artifacts/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}

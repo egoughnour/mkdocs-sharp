@@ -45,7 +45,7 @@ Releases are automated via GitHub Actions. To create a release:
 1. Push a tag: `git tag v1.2.3 && git push origin v1.2.3`
 2. Or manually trigger the release workflow with a version input
 
-The workflow builds, packs, creates a GitHub release, and publishes to NuGet.org using trusted publishing (no API key required).
+The workflow builds, packs, creates a GitHub release, and publishes to NuGet.org. Requires a `NUGET_API_KEY` secret in the repository.
 
 ## Local Release Scripts
 
