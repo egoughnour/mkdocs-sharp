@@ -152,6 +152,31 @@ namespace MkDocsSharp.MDGen
                 "`{0}`",
                 (x, assemblyName) => new[] { x.Attribute("cref")?.Value ?? x.Value ?? "" }
             ),
+            // HTML-style tags commonly used in XML doc comments
+            ["b"] = new TagRenderer(
+                "**{0}**",
+                (x, assemblyName) => new[] { x.Nodes().ToMarkDown(assemblyName) }
+            ),
+            ["strong"] = new TagRenderer(
+                "**{0}**",
+                (x, assemblyName) => new[] { x.Nodes().ToMarkDown(assemblyName) }
+            ),
+            ["i"] = new TagRenderer(
+                "*{0}*",
+                (x, assemblyName) => new[] { x.Nodes().ToMarkDown(assemblyName) }
+            ),
+            ["em"] = new TagRenderer(
+                "*{0}*",
+                (x, assemblyName) => new[] { x.Nodes().ToMarkDown(assemblyName) }
+            ),
+            ["br"] = new TagRenderer(
+                "  \n",
+                (x, assemblyName) => Array.Empty<string>()
+            ),
+            ["a"] = new TagRenderer(
+                "[{0}]({1})",
+                (x, assemblyName) => new[] { x.Nodes().ToMarkDown(assemblyName), x.Attribute("href")?.Value ?? "" }
+            ),
             ["none"] = new TagRenderer(
                 "",
                 (x, assemblyName) => Array.Empty<string>()
