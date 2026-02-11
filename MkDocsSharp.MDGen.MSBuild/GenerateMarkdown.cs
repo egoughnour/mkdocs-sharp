@@ -79,9 +79,9 @@ namespace MkDocsSharp.MDGen.MSBuild
             _generator = new MarkdownGenerator(new MSBuildLoggerAdapter(Log))
             {
                 InputXmlFiles = InputXml.Select(x => x.ItemSpec).ToArray(),
-                DocumentationPath = DocumentationPath?.ItemSpec,
+                DocumentationPath = DocumentationPath?.ItemSpec is { } dp ? Path.GetFullPath(dp) : null,
                 MergeFiles = MergeFiles,
-                OutputFile = OutputFile?.ItemSpec,
+                OutputFile = OutputFile?.ItemSpec is { } of ? Path.GetFullPath(of) : null,
                 WarnOnUnexpectedTag = WarnOnUnexpectedTag
             };
 
