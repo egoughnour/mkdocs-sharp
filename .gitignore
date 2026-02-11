@@ -255,3 +255,4 @@ paket-files/
 Model.xml
 *.FileListAbsolute.txt
 MkDocsSharp.MDGen.MSBuild.Test/docs/
+.DS_Store

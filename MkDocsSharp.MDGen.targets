@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <UsingTask TaskName="GenerateMarkdown" AssemblyFile="$(MSBuildThisFileDirectory)\..\tools\MkDocsSharp.MDGen.MSBuild.dll" />
+  <UsingTask TaskName="GenerateMarkdown" AssemblyFile="$(MSBuildThisFileDirectory)/../tools/MkDocsSharp.MDGen.MSBuild.dll" />
 
-  <!-- Property-driven defaults: consumers override via Directory.Build.props or -p: flags -->
+  <!-- Property-driven defaults: consumers override via Directory.Build.props or -p: flags.
+       Use forward slashes — backslashes are literal characters on macOS/Linux. -->
   <PropertyGroup>
-    <MkDocsInputXml Condition="'$(MkDocsInputXml)' == ''">$(MSBuildProjectDirectory)\$(OutputPath)\$(AssemblyName).xml</MkDocsInputXml>
-    <MkDocsDocumentationPath Condition="'$(MkDocsDocumentationPath)' == ''">$(MSBuildProjectDirectory)\docs</MkDocsDocumentationPath>
+    <MkDocsInputXml Condition="'$(MkDocsInputXml)' == ''">$(MSBuildProjectDirectory)/$(OutputPath)$(AssemblyName).xml</MkDocsInputXml>
+    <MkDocsDocumentationPath Condition="'$(MkDocsDocumentationPath)' == ''">$(MSBuildProjectDirectory)/docs</MkDocsDocumentationPath>
     <MkDocsMergeFiles Condition="'$(MkDocsMergeFiles)' == ''">true</MkDocsMergeFiles>
-    <MkDocsOutputFile Condition="'$(MkDocsOutputFile)' == ''">$(MSBuildProjectDirectory)\docs\index.md</MkDocsOutputFile>
+    <MkDocsOutputFile Condition="'$(MkDocsOutputFile)' == ''">$(MSBuildProjectDirectory)/docs/index.md</MkDocsOutputFile>
   </PropertyGroup>
 
   <Target Name="AfterBuild">

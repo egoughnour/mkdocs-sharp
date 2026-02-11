@@ -101,6 +101,7 @@ namespace MkDocsSharp.MDGen.MSBuild
             }
             else
             {
+                CreateDirectoryIfNeeded();
                 UpdateParametersFromInput();
                 if (MergeFiles && OutputFile == null)
                 {
@@ -114,7 +115,6 @@ namespace MkDocsSharp.MDGen.MSBuild
                 {
                     try
                     {
-                        CreateDirectoryIfNeeded();
                         GenerateFiles();
                         if (MergeFiles)
                         {
