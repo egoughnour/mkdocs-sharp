@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <UsingTask TaskName="GenerateMarkdown" AssemblyFile="$(MSBuildThisFileDirectory)\..\tools\MkDocsSharp.MDGen.MSBuild.dll" />
+
+  <!-- Property-driven defaults: consumers override via Directory.Build.props or -p: flags -->
+  <PropertyGroup>
+    <MkDocsInputXml Condition="'$(MkDocsInputXml)' == ''">$(MSBuildProjectDirectory)\$(OutputPath)\$(AssemblyName).xml</MkDocsInputXml>
+    <MkDocsDocumentationPath Condition="'$(MkDocsDocumentationPath)' == ''">$(MSBuildProjectDirectory)\docs</MkDocsDocumentationPath>
+    <MkDocsMergeFiles Condition="'$(MkDocsMergeFiles)' == ''">true</MkDocsMergeFiles>
+    <MkDocsOutputFile Condition="'$(MkDocsOutputFile)' == ''">$(MSBuildProjectDirectory)\docs\index.md</MkDocsOutputFile>
+  </PropertyGroup>
+
   <Target Name="AfterBuild">
     <Warning
-      Condition="!Exists('$(MSBuildProjectDirectory)\$(OutputPath)\$(AssemblyName).xml')"
+      Condition="!Exists('$(MkDocsInputXml)')"
       Text="MkDocsSharp.MDGen can't generate Markdown: Can't find Xml file matching assembly name.  Please confirm that your project file is configured to output the Xml documentation file in this build configuration."
-      File="$(MSBuildProjectDirectory)\$(OutputPath)\$(AssemblyName).xml"
+      File="$(MkDocsInputXml)"
     />
     <GenerateMarkdown
-      InputXml="$(MSBuildProjectDirectory)\$(OutputPath)\$(AssemblyName).xml"
-      DocumentationPath="$(MSBuildProjectDirectory)\docs"
-      MergeFiles="true"
-      OutputFile="$(MSBuildProjectDirectory)\docs\index.md"
+      InputXml="$(MkDocsInputXml)"
+      DocumentationPath="$(MkDocsDocumentationPath)"
+      MergeFiles="$(MkDocsMergeFiles)"
+      OutputFile="$(MkDocsOutputFile)"
     />
   </Target>
 </Project>
